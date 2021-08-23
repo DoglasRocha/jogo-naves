@@ -1,8 +1,9 @@
 const start = () => {
-    $('.inicio').hide()
+    $('.beginning').hide(); // hides the "inicio" div
 
-    $('.fundo-game').append('<div id="jogador"></div>')
-    $('.fundo-game').append('<div id="inimigo1"></div>')
-    $('.fundo-game').append('<div id="inimigo2"></div>')
-    $('.fundo-game').append('<div id="amigo"></div>')
+    // appends the "player", "enemy1", "enemy2" and "friend" divs in the "game-background" div
+    $('.game-background').append('<div id="player"></div>');
+    $('.game-background').append('<div id="enemy1"></div>');
+    $('.game-background').append('<div id="enemy2"></div>');
+    $('.game-background').append('<div id="friend"></div>');
 }
