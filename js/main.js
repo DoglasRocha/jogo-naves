@@ -1,6 +1,12 @@
-
 const game = {};
 game.pressed = [];
+const KEYS = {
+    W: 87, 
+    S: 83,
+    D: 68
+}
+var speed = 5;
+var yPosition = parseInt(Math.random() * 334);
 
 const loop = () => {
     $(document).keydown(function(e) {
@@ -13,7 +19,8 @@ const loop = () => {
     });
     
     moveBackground();
-    movePlayer()
+    movePlayer();
+    moveEnemy1();
 }
 
 game.timer = setInterval(loop, 30); 
@@ -45,10 +52,17 @@ const movePlayer = () => {
 
 }
 
-const KEYS = {
-    W: 87, 
-    S: 83,
-    D: 68
+const moveEnemy1 = () => {
+    xPosition = parseInt($('#enemy1').css('left'));
+    $('#enemy1').css('left', xPosition - speed);
+    $('#enemy1').css('top', yPosition);
+    
+    if (xPosition <= 0) {
+        yPosition = parseInt(Math.random() * 334);
+        $('#enemy1').css('left', 694);
+        $('#enemy1').css('top', yPosition);
+    }
+    
 }
 
 const start = () => {
