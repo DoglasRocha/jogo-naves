@@ -1,3 +1,22 @@
+const moveBackground = () => {
+    left = parseInt($('.game-background').css('background-position'));
+    $('.game-background').css('background-position', left - 1);
+}
+
+class Game {
+
+
+    constructor() {
+        this.game = {};
+        this.timer = setInterval(this.loop, 30);
+    }
+
+    loop() {
+        moveBackground();
+    }
+
+}
+
 const start = () => {
     $('.beginning').hide(); // hides the "inicio" div
 
@@ -6,4 +25,7 @@ const start = () => {
     $('.game-background').append('<div id="enemy1" class="animation2"></div>');
     $('.game-background').append('<div id="enemy2" ></div>');
     $('.game-background').append('<div id="friend" class="animation3"></div>');
+
+    let game = new Game();
 }
+
