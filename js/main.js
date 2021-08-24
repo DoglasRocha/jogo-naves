@@ -26,19 +26,23 @@ const moveBackground = () => {
 const movePlayer = () => {
     if (game.pressed[KEYS.W]) {
         let top = parseInt($("#player").css("top"));
-        $("#player").css("top", top - 10);
-    
+        if (top > 10) {
+            $("#player").css("top", top - 10);
+        }
     }
     
     if (game.pressed[KEYS.S]) {
         let top = parseInt($("#player").css("top"));
-        $("#player").css("top", top + 10);	
+        if (top < 434) {
+            $("#player").css("top", top + 10);	
+        }
     }
     
     if (game.pressed[KEYS.D]) {
         
         //Chama função Disparo	
     }
+
 }
 
 const KEYS = {
