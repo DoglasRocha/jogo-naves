@@ -16,7 +16,7 @@ const loop = () => {
     movePlayer()
 }
 
-game.timer = setInterval(loop, 30);
+game.timer = setInterval(loop, 30); 
 
 const moveBackground = () => {
     left = parseInt($('.game-background').css('background-position'));
