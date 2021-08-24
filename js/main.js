@@ -21,6 +21,8 @@ const loop = () => {
     moveBackground();
     movePlayer();
     moveEnemy1();
+    moveEnemy2();
+    moveFriend();
 }
 
 game.timer = setInterval(loop, 30); 
@@ -63,6 +65,24 @@ const moveEnemy1 = () => {
         $('#enemy1').css('top', yPosition);
     }
     
+}
+
+const moveEnemy2 = () => {
+    xPosition = parseInt($('#enemy2').css('left'));
+    $('#enemy2').css('left', xPosition - 3);
+
+    if (xPosition <= 0) {
+        $('#enemy2').css('left', 775);
+    }
+}
+
+const moveFriend = () => {
+    xPosition = parseInt($('#friend').css('left'));
+    $('#friend').css('left', xPosition + 1);
+
+    if (xPosition > 906) {
+        $('#friend').css('left', 0);
+    }
 }
 
 const start = () => {
