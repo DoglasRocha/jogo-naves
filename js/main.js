@@ -25,6 +25,7 @@ const loop = () => {
     moveEnemy1();
     moveEnemy2();
     moveFriend();
+    collision();
 }
 
 game.timer = setInterval(loop, 30); 
@@ -115,6 +116,10 @@ const doShoot = () => {
         canShoot = true;
         console.log('aaa')
     }
+}
+
+const collision = () => {
+    let collision1 = ($('#player').collision($('#enemy1')));
 }
 
 const start = () => {
