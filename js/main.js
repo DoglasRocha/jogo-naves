@@ -7,6 +7,8 @@ const KEYS = {
 }
 var speed = 5;
 var yPosition = parseInt(Math.random() * 334);
+var canShoot = true;
+var shootTime;
 
 const loop = () => {
     $(document).keydown(function(e) {
@@ -48,8 +50,7 @@ const movePlayer = () => {
     }
     
     if (game.pressed[KEYS.D]) {
-        
-        //Chama função Disparo	
+        shoot()
     }
 
 }
@@ -85,8 +86,39 @@ const moveFriend = () => {
     }
 }
 
+const shoot = () => {
+    if (canShoot) {
+        canShoot = false;
+
+        let top = parseInt($('#player').css('top'));
+        xPosition = parseInt($('#player').css('left'));
+        let shootX = xPosition + 190;
+        let shootTop = top + 46;
+        $('.game-background').append('<div id="shoot"></div>');
+        console.log('aaaa')
+        $('#shoot').css('top', shootTop);
+        $('#shoot').css('left', shootX);
+
+        shootTime = window.setInterval(doShoot, 30);
+    }
+}
+
+const doShoot = () => {
+    console.log('a')
+    xPosition = parseInt($('#shoot').css('left'));
+    $('#shoot').css('left', xPosition + 15);
+
+    if (xPosition > 900) {
+        window.clearInterval(shootTime);
+        shootTime = null;
+        $('#shoot').remove();
+        canShoot = true;
+        console.log('aaa')
+    }
+}
+
 const start = () => {
-    $('.beginning').hide(); // hides the "inicio" div
+    $('.beginning').hide(); // hides the "beggining" div
 
     // appends the "player", "enemy1", "enemy2" and "friend" divs in the "game-background" div
     $('.game-background').append('<div id="player" class="animation1";></div>');
