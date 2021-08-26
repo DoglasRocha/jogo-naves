@@ -96,7 +96,6 @@ const shoot = () => {
         let shootX = xPosition + 190;
         let shootTop = top + 46;
         $('.game-background').append('<div id="shoot"></div>');
-        console.log('aaaa')
         $('#shoot').css('top', shootTop);
         $('#shoot').css('left', shootX);
 
@@ -105,7 +104,6 @@ const shoot = () => {
 }
 
 const doShoot = () => {
-    console.log('a')
     xPosition = parseInt($('#shoot').css('left'));
     $('#shoot').css('left', xPosition + 15);
 
@@ -114,12 +112,38 @@ const doShoot = () => {
         shootTime = null;
         $('#shoot').remove();
         canShoot = true;
-        console.log('aaa')
     }
 }
 
 const collision = () => {
     let collision1 = ($('#player').collision($('#enemy1')));
+
+    if (collision1.length > 0) {
+        let xEnemy1 = parseInt($('#enemy1').css('left'));
+        let yEnemy1 = parseInt($('#enemy1').css('top'));
+        explosion1(xEnemy1, yEnemy1);
+
+        yPosition = parseInt(Math.random() * 334);
+        $('#enemy1').css('left', 694);
+        $('#enemy1').css('top', yPosition);
+    }
+}
+
+const explosion1 = (xEnemy1, yEnemy1) => {
+    const removeExplosion = () => {
+        div.remove();
+        window.clearInterval(explosionTime);
+        explosionTime = null;
+    }
+
+    $('.game-background').append('<div id="explosion1"></div>');
+    $('#explosion1').css('background-image', 'url(imgs/explosao.png)');
+    let div = $('#explosion1');
+    div.css('top', yEnemy1);
+    div.css('left', xEnemy1);
+    div.animate({width: 200, opacity: 0}, 'slow');
+
+    let explosionTime = window.setInterval(removeExplosion, 1000);
 }
 
 const start = () => {
