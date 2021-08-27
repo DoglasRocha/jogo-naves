@@ -13,6 +13,20 @@ var gameOver = false;
 var points = 0;
 var saves = 0;
 var losts = 0;
+var currentEnergy = 3;
+
+const start = () => {
+    $('.beginning').hide(); // hides the "beggining" div
+
+    // appends the "player", "enemy1", "enemy2" and "friend" divs in the "game-background" div
+    $('.game-background').append('<div id="player" class="animation1";></div>');
+    $('.game-background').append('<div id="enemy1" class="animation2"></div>');
+    $('.game-background').append('<div id="enemy2" ></div>');
+    $('.game-background').append('<div id="friend" class="animation3"></div>');
+    $('.game-background').append('<div id="scoreboard"></div>');
+    $('.game-background').append('<div id="energy"></div>');
+}
+
 
 const loop = () => {
     $(document).keydown(function(e) {
@@ -31,6 +45,7 @@ const loop = () => {
     moveFriend();
     collision();
     scoreboard();
+    energy();
 }
 
 game.timer = setInterval(loop, 30); 
@@ -129,6 +144,8 @@ const collision = () => {
     let collision6 = ($('#enemy2').collision($('#friend')));
 
     if (collision1.length > 0) {
+        currentEnergy--;
+
         let xEnemy1 = parseInt($('#enemy1').css('left'));
         let yEnemy1 = parseInt($('#enemy1').css('top'));
         explosion1(xEnemy1, yEnemy1);
@@ -139,6 +156,8 @@ const collision = () => {
     }
 
     if (collision2.length > 0) {
+        currentEnergy--;
+
         let xEnemy2 = parseInt($('#enemy2').css('left'));
         let yEnemy2 = parseInt($('#enemy2').css('top'));
         explosion2(xEnemy2, yEnemy2);
@@ -279,14 +298,21 @@ const scoreboard = () => {
     $('#scoreboard').html('<h2> Pontos: ' + points + ', Salvos: ' + saves + ', Perdidos: ' + losts + '</h2>')
 }
 
-const start = () => {
-    $('.beginning').hide(); // hides the "beggining" div
+const energy = () => {
 
-    // appends the "player", "enemy1", "enemy2" and "friend" divs in the "game-background" div
-    $('.game-background').append('<div id="player" class="animation1";></div>');
-    $('.game-background').append('<div id="enemy1" class="animation2"></div>');
-    $('.game-background').append('<div id="enemy2" ></div>');
-    $('.game-background').append('<div id="friend" class="animation3"></div>');
-    $('.game-background').append('<div id="scoreboard"></div>')
+    switch (currentEnergy) {
+        case (3):
+            $('#energy').css('background-image', 'url(imgs/energia3.png)');
+            break;
+        case (2):
+            $('#energy').css('background-image', 'url(imgs/energia2.png)');
+            break;
+        case (1):
+            $('#energy').css('background-image', 'url(imgs/energia1.png)');
+            break;
+        default:
+            $('#energy').css('background-image', 'url(imgs/energia0.png)');
+            // gameOver();
+            break;
+    }
 }
-
