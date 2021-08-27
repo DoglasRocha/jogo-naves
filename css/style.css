@@ -220,7 +220,7 @@ body {
 }
 
 h2 {
-    font-family: Title;
+    font-family: title;
     font-size: 20px;
     color: #fff;
 }
@@ -231,4 +231,21 @@ h2 {
     position: absolute;
     left: 750px;
     top: 7px;
+}
+
+h3 {
+    font-family: title;
+    font-size: 20px;
+    color: #603a03;
+}
+
+#end {
+    width: 350px;
+    height: 200px;
+    background-color: #fff;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    text-align: center;
+    padding: 10px;
 }

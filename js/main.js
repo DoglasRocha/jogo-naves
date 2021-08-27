@@ -327,7 +327,25 @@ const energy = () => {
             break;
         default:
             $('#energy').css('background-image', 'url(imgs/energia0.png)');
-            // gameOver();
+            endGame();
             break;
     }
+}
+
+const endGame = () => {
+    gameOver = true;
+    music.pause()
+    gameoverSound.play();
+
+    window.clearInterval(game, game.timer);
+    game.timer = null;
+
+    $('#player').remove();
+    $('#enemy1').remove();
+    $('#enemy2').remove();
+    $('#friend').remove();
+
+    $('.game-background').append('<div id="end"></div>');
+
+    $('#end').html('<h1> Game Over </h1><p>Sua pontuação foi: ' + points + '</p>' + '<div id="reinicia" onClick="reiniciaJogo()"><h3>Jogar Novamente</h3></div>');
 }
