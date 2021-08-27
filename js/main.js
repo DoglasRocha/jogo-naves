@@ -172,9 +172,15 @@ const collision = () => {
         $('#friend').remove();
     }
 
-    /*if (collision6.length > 0) {
+    if (collision6.length > 0) {
+        let xFriend = parseInt($('#friend').css('left'));
+        let yFriend = parseInt($('#friend').css('top'));
+        explosion3(xFriend, yFriend);
 
-    }*/
+        $('#friend').remove();
+
+        repositionateFriend();
+    }
 
 }
 
@@ -214,6 +220,21 @@ const explosion2 = (xEnemy2, yEnemy2) => {
     let explosionTime2 = window.setInterval(removeExplosion2, 1000);
 }
 
+const explosion3 = (xFriend, yFriend) => {
+
+    const resetExplosion3 = () => {
+        $('#explosion3').remove();;
+        window.clearInterval(explosionTime3);
+        explosionTime3 = null;
+    }
+
+    $('.game-background').append('<div id="explosion3" class="animation4"></div>');
+    $('#explosion3').css('top', yFriend);
+    $('#explosion3').css('left', xFriend);
+
+    let explosionTime3 = window.setInterval(resetExplosion3, 1000);
+}
+
 const repositionateEnemy2 = () => {
 
     const repositionate4 = () => {
@@ -235,7 +256,7 @@ const repositionateFriend = () => {
         friendTime = null;
 
         if (!gameOver) {
-            $('.game-background').append('<div id="friend" class="animate3"></div>');
+            $('.game-background').append('<div id="friend" class="animation3"></div>');
         }
     }
 
