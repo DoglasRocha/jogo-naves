@@ -168,6 +168,7 @@ const collision = () => {
     }
 
     if (collision3.length > 0) {
+        speed += 0.3;
         points += 100;
 
         let xEnemy1 = parseInt($('#enemy1').css('left'));
