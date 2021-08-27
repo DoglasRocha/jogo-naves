@@ -1,5 +1,6 @@
 const game = {};
 game.pressed = [];
+
 const KEYS = {
     W: 87, 
     S: 83,
@@ -34,8 +35,11 @@ const start = () => {
     $('.game-background').append('<div id="friend" class="animation3"></div>');
     $('.game-background').append('<div id="scoreboard"></div>');
     $('.game-background').append('<div id="energy"></div>');
-}
 
+    gameOver = false;
+    currentEnergy = 3;
+    game.timer = setInterval(loop, 30); 
+}
 
 const loop = () => {
     $(document).keydown(function(e) {
@@ -57,7 +61,7 @@ const loop = () => {
     energy();
 }
 
-game.timer = setInterval(loop, 30); 
+// game.timer = setInterval(loop, 30); 
 
 const moveBackground = () => {
     left = parseInt($('.game-background').css('background-position'));
@@ -337,7 +341,7 @@ const endGame = () => {
     music.pause()
     gameoverSound.play();
 
-    window.clearInterval(game, game.timer);
+    window.clearInterval(game.timer);
     game.timer = null;
 
     $('#player').remove();
@@ -347,5 +351,11 @@ const endGame = () => {
 
     $('.game-background').append('<div id="end"></div>');
 
-    $('#end').html('<h1> Game Over </h1><p>Sua pontuação foi: ' + points + '</p>' + '<div id="reinicia" onClick="reiniciaJogo()"><h3>Jogar Novamente</h3></div>');
+    $('#end').html('<h1> Game Over </h1><p>Sua pontuação foi: ' + points + '</p>' + '<div id="reinit" onClick="reinitGame()"><h3>Jogar Novamente</h3></div>');
+}
+
+const reinitGame = () => {
+    gameoverSound.pause();
+    $('#end').remove();
+    start();
 }
