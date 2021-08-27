@@ -10,6 +10,9 @@ var yPosition = parseInt(Math.random() * 334);
 var canShoot = true;
 var shootTime;
 var gameOver = false;
+var points = 0;
+var saves = 0;
+var losts = 0;
 
 const loop = () => {
     $(document).keydown(function(e) {
@@ -27,6 +30,7 @@ const loop = () => {
     moveEnemy2();
     moveFriend();
     collision();
+    scoreboard();
 }
 
 game.timer = setInterval(loop, 30); 
@@ -145,6 +149,8 @@ const collision = () => {
     }
 
     if (collision3.length > 0) {
+        points += 100;
+
         let xEnemy1 = parseInt($('#enemy1').css('left'));
         let yEnemy1 = parseInt($('#enemy1').css('top'));
 
@@ -157,6 +163,8 @@ const collision = () => {
     }
 
     if (collision4.length > 0) {
+        points += 50;
+
         let xEnemy2 = parseInt($('#enemy2').css('left'));
         let yEnemy2 = parseInt($('#enemy2').css('top'));
         
@@ -168,11 +176,15 @@ const collision = () => {
     }
 
     if (collision5.length > 0) {
+        saves++;
+
         repositionateFriend();
         $('#friend').remove();
     }
 
     if (collision6.length > 0) {
+        losts++;
+
         let xFriend = parseInt($('#friend').css('left'));
         let yFriend = parseInt($('#friend').css('top'));
         explosion3(xFriend, yFriend);
@@ -263,6 +275,10 @@ const repositionateFriend = () => {
     let friendTime = window.setInterval(repositionate6, 6000);
 }
 
+const scoreboard = () => {
+    $('#scoreboard').html('<h2> Pontos: ' + points + ', Salvos: ' + saves + ', Perdidos: ' + losts + '</h2>')
+}
+
 const start = () => {
     $('.beginning').hide(); // hides the "beggining" div
 
@@ -271,5 +287,6 @@ const start = () => {
     $('.game-background').append('<div id="enemy1" class="animation2"></div>');
     $('.game-background').append('<div id="enemy2" ></div>');
     $('.game-background').append('<div id="friend" class="animation3"></div>');
+    $('.game-background').append('<div id="scoreboard"></div>')
 }
 
